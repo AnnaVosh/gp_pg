@@ -1,4 +1,4 @@
-module go_postgresql
+module gp_pg
 
 go 1.22
 
