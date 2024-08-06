@@ -162,3 +162,25 @@ func ListUsers() ([]Userdata, error) {
 	
 	return data, nil
 }
+
+func UpdateUser(d Userdata) error {
+	db, err := openConnection()
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+
+	userID := exists(d.Username)
+	if userID == -1 {
+		return errors.New("User with username does not exist")
+	}
+
+	d.ID = userID
+	updateStatement := `UPDATE userdata set name=$1, surname=$2, description=$3 where userid=$4`
+	err = db.Exec(updateStatement, d.Username, d.Surname, d.Description, d.ID)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
