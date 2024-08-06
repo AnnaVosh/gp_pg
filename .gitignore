@@ -7,8 +7,8 @@
 
 
 *.idea
-go.mod
-go.sum
+*go.mod
+*go.sum
 
 # Test binary, built with `go test -c`
 *.test
